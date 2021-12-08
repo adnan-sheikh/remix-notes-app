@@ -9,15 +9,21 @@ import {
 } from "remix";
 import type { LinksFunction } from "remix";
 
-import tailwindUrl from "./styles/tailwind.css";
+import globalStylesUrl from "./styles/globalStyles.css";
 
 export let links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: tailwindUrl }];
+  return [
+    { rel: "stylesheet", href: globalStylesUrl },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css?family=Merriweather|Muli:300",
+    },
+  ];
 };
 
 export default function App() {
   return (
-    <Document>
+    <Document title="Remix Notes!">
       <Outlet />
     </Document>
   );
@@ -90,7 +96,7 @@ function Document({
         <Links />
       </head>
       <body>
-        {children}
+        <div id="root">{children}</div>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}
