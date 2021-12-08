@@ -1,0 +1,14 @@
+.noteContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.notePreview {
+  max-width: 1024px;
+}
+
+button {
+  align-self: flex-start;
+  width: 100px;
+}

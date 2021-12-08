@@ -1,0 +1,24 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 500px;
+  font-size: 1.25rem;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer > textarea {
+  min-height: 500px;
+}
+
+button[type="submit"] {
+  font-size: inherit;
+}
+
+.validationError {
+  color: hsl(0, 71%, 42%);
+}

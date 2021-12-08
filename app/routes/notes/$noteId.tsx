@@ -1,6 +1,17 @@
 import { Note } from ".prisma/client";
-import { LoaderFunction, useCatch, useLoaderData } from "remix";
+import { Link, useCatch, useLoaderData } from "remix";
+import type { LoaderFunction, LinksFunction } from "remix";
 import { db } from "~/utils/db.server";
+import noteIdStylesUrl from "~/styles/notes/$noteId.css";
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: "stylesheet",
+      href: noteIdStylesUrl,
+    },
+  ];
+};
 
 export const loader: LoaderFunction = async ({ params }) => {
   const note: Note | null = await db.note.findUnique({
@@ -15,9 +26,14 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function Note() {
   const note = useLoaderData<Note>();
   return (
-    <section>
-      <h1>{note.title}</h1>
-      <p>{note.content}</p>
+    <section className="noteContainer">
+      <section className="notePreview">
+        <h1>{note.title}</h1>
+        <p>{note.content}</p>
+      </section>
+      <Link to="edit">
+        <button>Edit</button>
+      </Link>
     </section>
   );
 }

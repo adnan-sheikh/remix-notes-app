@@ -1,37 +1,38 @@
-import { Form, json, redirect, useActionData, useCatch } from "remix";
-import type { LinksFunction, ActionFunction } from "remix";
-import notesIndexStylesUrl from "~/styles/notes/new.css";
+import {
+  ActionFunction,
+  Form,
+  json,
+  LinksFunction,
+  redirect,
+  useActionData,
+  useCatch,
+  useLoaderData,
+} from "remix";
+import type { LoaderFunction } from "remix";
 import { db } from "~/utils/db.server";
+import { Note } from ".prisma/client";
+import editNoteStylesUrl from "~/styles/notes/$noteId.edit.css";
+import { ActionData, validateContent, validateTitle } from "./new";
 
 export const links: LinksFunction = () => {
-  return [{ rel: "stylesheet", href: notesIndexStylesUrl }];
+  return [
+    {
+      rel: "stylesheet",
+      href: editNoteStylesUrl,
+    },
+  ];
 };
 
-export function validateTitle(title: string) {
-  if (title.length < 5) {
-    return "That title is too short (should be more than 5 chars)";
+export const loader: LoaderFunction = async ({ params }) => {
+  const note = await db.note.findUnique({ where: { id: params.noteId } });
+  if (!note) {
+    throw new Response("Note not found", { status: 404 });
   }
-}
-
-export function validateContent(content: string) {
-  if (content.length < 10) {
-    return "That note is too short!";
-  }
-}
-
-export type ActionData = {
-  formError?: string;
-  fieldErrors?: {
-    title: string;
-    content: string;
-  };
-  fields?: {
-    title: string;
-    content: string;
-  };
+  return note;
 };
 
 export const action: ActionFunction = async ({
+  params,
   request,
 }): Promise<ActionData | Response> => {
   const formData = await request.formData();
@@ -53,24 +54,22 @@ export const action: ActionFunction = async ({
     return json({ fieldErrors, fields }, { status: 400 });
   }
 
-  const newNote = await db.note.create({ data: fields });
-  return redirect(`/notes/${newNote.id}`);
+  const updatedNote = await db.note.update({
+    where: { id: params.noteId },
+    data: { ...fields },
+  });
+  return redirect(`/notes/${updatedNote.id}`);
 };
 
-export default function Note() {
+export default function EditNote() {
+  const note = useLoaderData<Note>();
   const actionData = useActionData<ActionData>();
 
   return (
     <Form method="post">
-      Add a new note
       <div className="inputContainer">
         <label htmlFor="title">Title: </label>
-        <input
-          id="title"
-          type="text"
-          name="title"
-          defaultValue={actionData?.fields?.title}
-        />
+        <input id="title" type="text" name="title" defaultValue={note.title} />
         {actionData?.fieldErrors?.title ? (
           <p className="validationError" role="alert">
             {actionData?.fieldErrors?.title}
@@ -79,18 +78,14 @@ export default function Note() {
       </div>
       <div className="inputContainer">
         <label htmlFor="content">Content: </label>
-        <textarea
-          id="content"
-          name="content"
-          defaultValue={actionData?.fields?.content}
-        />
+        <textarea id="content" name="content" defaultValue={note.content} />
         {actionData?.fieldErrors?.content ? (
           <p className="validationError" role="alert">
             {actionData?.fieldErrors?.content}
           </p>
         ) : null}
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit">Update</button>
     </Form>
   );
 }
