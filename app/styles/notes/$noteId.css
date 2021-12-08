@@ -4,11 +4,19 @@
   width: 100%;
 }
 
-.notePreview {
+/* .notePreview {
   max-width: 1024px;
+} */
+
+h1 {
+  font-size: 2rem;
 }
 
 button {
   align-self: flex-start;
   width: 100px;
+}
+
+a {
+  color: white
 }

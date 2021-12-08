@@ -74,7 +74,7 @@ export default function EditNote() {
   const actionData = useActionData<ActionData>();
 
   return (
-    <>
+    <div className="editNoteContainer">
       <Form method="post">
         <div className="inputContainer">
           <label htmlFor="title">Title: </label>
@@ -107,7 +107,7 @@ export default function EditNote() {
           Delete Note
         </button>
       </Form>
-    </>
+    </div>
   );
 }
 

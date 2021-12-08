@@ -31,9 +31,9 @@ export default function Note() {
         <h1>{note.title}</h1>
         <p>{note.content}</p>
       </section>
-      <Link to="edit">
-        <button>Edit</button>
-      </Link>
+      <button>
+        <Link to="edit">Edit</Link>
+      </button>
     </section>
   );
 }

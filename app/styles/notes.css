@@ -1,6 +1,6 @@
 .notesLayout {
   display: flex;
-  padding: 32px;
+  padding: 32px 32px 0;
 }
 
 .newButton {
@@ -8,22 +8,29 @@
 }
 
 .sidebarNotes {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  margin-right: 32px;
   padding: 0;
+  margin-right: 32px;
+  max-height: 100vh;
+  overflow: auto;
 }
 
 .noteCard {
   color: black;
-  max-width: 250px;
+  max-width: 300px;
   padding: 12px;
   border: 1px solid black;
   border-radius: 8px;
 }
 
-.note {
+li {
   list-style-type: none;
+}
+
+.note {
+  font-weight: normal;
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;

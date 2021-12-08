@@ -30,12 +30,14 @@ export default function Notes() {
           <button className="newButton">Create new note</button>
         </Link>
         {notes.map((note) => (
-          <Link to={note.id} key={note.id}>
-            <div className="noteCard">
-              <li className="note">{note.title}</li>
-              <p className="date">{note.updatedAt}</p>
-            </div>
-          </Link>
+          <li key={note.id} >
+            <Link to={note.id}>
+              <div className="noteCard">
+                <h3 className="note">{note.title}</h3>
+                <p className="date">{note.updatedAt}</p>
+              </div>
+            </Link>
+          </li>
         ))}
       </ul>
       <Outlet />
