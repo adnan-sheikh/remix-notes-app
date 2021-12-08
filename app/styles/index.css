@@ -1,0 +1,27 @@
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.indexContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--secondary-color-dark);
+}
+
+.link {
+  position: relative;
+  color: white;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--supporting-color);
+}
+
+.title {
+  font-size: 2.5rem;
+}

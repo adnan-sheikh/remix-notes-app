@@ -1,13 +1,20 @@
+import type { LinksFunction } from "remix";
 import { Link } from "remix";
+import indexStylesUrl from "~/styles/index.css";
+
+export let links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: indexStylesUrl }];
+};
 
 export default function Index() {
   return (
-    <div className="">
-      <p>
-        Welcome to the <span className="">Remix Notes App</span>, here you can
-        create notes, edit and delete them
-      </p>
-      <Link to="notes">Read Notes</Link>
+    <div className="indexContainer">
+      <p>Welcome to the</p>
+      <p className="title">Remix Notes App</p>
+      <p>Here you can create notes, edit and delete them</p>
+      <Link to="notes" className="link">
+        Read Notes
+      </Link>
     </div>
   );
 }
