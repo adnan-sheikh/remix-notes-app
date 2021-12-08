@@ -2,7 +2,7 @@ import type { LinksFunction } from "remix";
 import { Link } from "remix";
 import indexStylesUrl from "~/styles/index.css";
 
-export let links: LinksFunction = () => {
+export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: indexStylesUrl }];
 };
 

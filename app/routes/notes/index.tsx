@@ -1,7 +1,7 @@
 import type { LinksFunction } from "remix";
 import notesIndexStylesUrl from "~/styles/notes/index.css";
 
-export let links: LinksFunction = () => {
+export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: notesIndexStylesUrl }];
 };
 

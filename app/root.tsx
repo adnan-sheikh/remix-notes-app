@@ -11,7 +11,7 @@ import type { LinksFunction } from "remix";
 
 import globalStylesUrl from "./styles/globalStyles.css";
 
-export let links: LinksFunction = () => {
+export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: globalStylesUrl },
     {
@@ -47,7 +47,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 }
 
 export function CatchBoundary() {
-  let caught = useCatch();
+  const caught = useCatch();
 
   let message;
   switch (caught.status) {
