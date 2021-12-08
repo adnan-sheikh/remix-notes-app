@@ -8,18 +8,17 @@ export let links: LinksFunction = () => {
 
 export default function Note() {
   return (
-    <>
-      <Form method="post">
-        <div className="inputContainer">
-          <label htmlFor="title">Title: </label>
-          <input id="title" type="text" name="title" />
-        </div>
-        <div className="inputContainer">
-          <label htmlFor="content">Content: </label>
-          <textarea id="content" name="content" />
-        </div>
-        <button type="submit">Submit</button>
-      </Form>
-    </>
+    <Form method="post">
+      Add a new note
+      <div className="inputContainer">
+        <label htmlFor="title">Title: </label>
+        <input id="title" type="text" name="title" />
+      </div>
+      <div className="inputContainer">
+        <label htmlFor="content">Content: </label>
+        <textarea id="content" name="content" />
+      </div>
+      <button type="submit">Submit</button>
+    </Form>
   );
 }
