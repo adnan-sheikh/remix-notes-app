@@ -1,3 +1,34 @@
 .notesLayout {
   display: flex;
+  padding: 32px;
+}
+
+.newButton {
+  width: 100%;
+}
+
+.sidebarNotes {
+  display: grid;
+  gap: 16px;
+  margin-right: 32px;
+  padding: 0;
+}
+
+.noteCard {
+  color: black;
+  max-width: 250px;
+  padding: 12px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.note {
+  list-style-type: none;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+.date {
+  font-size: 1rem;
 }

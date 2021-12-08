@@ -97,3 +97,16 @@ p,
 a {
   font-size: 1.2rem;
 }
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  background: hsl(140, 55%, 38%);
+  border: none;
+  border-radius: 2px;
+  padding: 8px;
+  color: white;
+}

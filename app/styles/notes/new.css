@@ -1,0 +1,16 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 500px;
+  font-size: 1.25rem;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+button[type="submit"] {
+  font-size: inherit;
+}

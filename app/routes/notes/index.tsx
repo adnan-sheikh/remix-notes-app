@@ -1,5 +1,4 @@
 import type { LinksFunction } from "remix";
-import { Outlet } from "remix";
 import notesIndexStylesUrl from "~/styles/notes/index.css";
 
 export let links: LinksFunction = () => {
@@ -7,5 +6,9 @@ export let links: LinksFunction = () => {
 };
 
 export default function NotesIndexRoute() {
-  return <div className="notesIndex">This is the index route of notes</div>;
+  return (
+    <div className="notesIndex">
+      <p>Please click on some note on the left to view the note content or Create a new note! 😉</p>
+    </div>
+  );
 }
