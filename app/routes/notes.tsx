@@ -26,12 +26,12 @@ export default function Notes() {
   return (
     <div className="notesLayout">
       <ul className="sidebarNotes">
-        <Link to="new">
+        <Link to="new" prefetch="intent">
           <button className="newButton">Create new note</button>
         </Link>
         {notes.map((note) => (
-          <li key={note.id} >
-            <Link to={note.id}>
+          <li key={note.id}>
+            <Link to={note.id} prefetch="intent">
               <div className="noteCard">
                 <h3 className="note">{note.title}</h3>
                 <p className="date">{note.updatedAt}</p>

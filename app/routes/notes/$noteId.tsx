@@ -32,7 +32,9 @@ export default function Note() {
         <p>{note.content}</p>
       </section>
       <button>
-        <Link to="edit">Edit</Link>
+        <Link to="edit" prefetch="intent">
+          Edit
+        </Link>
       </button>
     </section>
   );

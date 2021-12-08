@@ -12,7 +12,7 @@ export default function Index() {
       <p>Welcome to the</p>
       <p className="title">Remix Notes App</p>
       <p>Here you can create notes, edit and delete them</p>
-      <Link to="notes" className="link">
+      <Link to="notes" prefetch="intent" className="link">
         Read Notes
       </Link>
     </div>
