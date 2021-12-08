@@ -14,3 +14,7 @@ form {
 button[type="submit"] {
   font-size: inherit;
 }
+
+.validationError {
+  color: hsl(0, 71%, 42%);
+}
