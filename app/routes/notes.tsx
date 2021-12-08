@@ -7,7 +7,9 @@ import { db } from "~/utils/db.server";
 type LoaderData = Array<Pick<Note, "id" | "title" | "updatedAt">>;
 
 export const loader: LoaderFunction = async () => {
-  const notes: LoaderData = await db.note.findMany();
+  const notes: LoaderData = await db.note.findMany({
+    orderBy: { updatedAt: "desc" },
+  });
   const dateFormattedNotes = notes.map((note) => ({
     ...note,
     updatedAt: note.updatedAt.toLocaleDateString("en-IN"),

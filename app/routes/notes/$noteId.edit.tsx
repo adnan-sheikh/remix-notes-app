@@ -38,6 +38,13 @@ export const action: ActionFunction = async ({
   const formData = await request.formData();
   const title = formData.get("title");
   const content = formData.get("content");
+  const method = formData.get("_method");
+
+  if (method === "delete") {
+    console.log("delete method on");
+    await db.note.delete({ where: { id: params.noteId } });
+    return redirect(`/notes/`);
+  }
 
   if (typeof title !== "string" || typeof content !== "string") {
     return json({ formError: "Form data is invalid" }, { status: 422 });
@@ -58,6 +65,7 @@ export const action: ActionFunction = async ({
     where: { id: params.noteId },
     data: { ...fields },
   });
+
   return redirect(`/notes/${updatedNote.id}`);
 };
 
@@ -66,27 +74,40 @@ export default function EditNote() {
   const actionData = useActionData<ActionData>();
 
   return (
-    <Form method="post">
-      <div className="inputContainer">
-        <label htmlFor="title">Title: </label>
-        <input id="title" type="text" name="title" defaultValue={note.title} />
-        {actionData?.fieldErrors?.title ? (
-          <p className="validationError" role="alert">
-            {actionData?.fieldErrors?.title}
-          </p>
-        ) : null}
-      </div>
-      <div className="inputContainer">
-        <label htmlFor="content">Content: </label>
-        <textarea id="content" name="content" defaultValue={note.content} />
-        {actionData?.fieldErrors?.content ? (
-          <p className="validationError" role="alert">
-            {actionData?.fieldErrors?.content}
-          </p>
-        ) : null}
-      </div>
-      <button type="submit">Update</button>
-    </Form>
+    <>
+      <Form method="post">
+        <div className="inputContainer">
+          <label htmlFor="title">Title: </label>
+          <input
+            id="title"
+            type="text"
+            name="title"
+            defaultValue={note.title}
+          />
+          {actionData?.fieldErrors?.title ? (
+            <p className="validationError" role="alert">
+              {actionData?.fieldErrors?.title}
+            </p>
+          ) : null}
+        </div>
+        <div className="inputContainer">
+          <label htmlFor="content">Content: </label>
+          <textarea id="content" name="content" defaultValue={note.content} />
+          {actionData?.fieldErrors?.content ? (
+            <p className="validationError" role="alert">
+              {actionData?.fieldErrors?.content}
+            </p>
+          ) : null}
+        </div>
+        <button type="submit">Update</button>
+      </Form>
+      <Form method="post">
+        <input type="hidden" name="_method" value="delete" />
+        <button type="submit" className="deleteBtn">
+          Delete Note
+        </button>
+      </Form>
+    </>
   );
 }
 
